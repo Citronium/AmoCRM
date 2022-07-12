@@ -2,7 +2,7 @@
  * Фабрика для создания сделок {@link Lead}
  * */
 import ResourceFactory from "../ResourceFactory";
-import { ILead } from "../activeRecords/Lead";
+import Lead, { ILead } from "../activeRecords/Lead";
 import ResourcePagination from "../ResourcePagination";
 import { IRequestOptions } from "../../interfaces/common";
 import { JSONObject } from "../../types";
@@ -137,7 +137,7 @@ export interface ILeadFactory extends IResourceFactory<ILead> {
  * Фабрика управления сделками
  * */
 export declare class BaseLeadFactory extends ResourceFactory<ILead> {
-    getEntityClass(): any;
+    getEntityClass(): typeof Lead;
     getBaseUrl(): string;
     getEmbeddedKey(): string;
     /**

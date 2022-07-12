@@ -6,11 +6,6 @@ import { JSONObject } from "../../types";
 import { IRequestOptions } from "../../interfaces/common";
 import { ILeadFactory } from "../factories/LeadFactory";
 import { IEntityAttributes, IResourceEntity } from "../../interfaces/api";
-import { applyMixins } from "../../util";
-import { hasSave } from "./mixins/hasSave";
-import { hasFetch } from "./mixins/hasFetch";
-import { hasCreate } from "./mixins/hasCreate";
-import { hasUpdate } from "./mixins/hasUpdate";
 import { IHasGetByIdCriteria } from "../factories/mixins/hasGetById";
 import { HasCreate } from "./decorators/HasCreate";
 import { HasUpdate } from "./decorators/HasUpdate";
@@ -93,12 +88,11 @@ export interface ILead extends IResourceEntity<ILeadFactory>, LeadAttributes {
 /**
  * Сделка
  */
-
 @HasCreate
 @HasUpdate
 @HasFetch
 @HasSave
-export class BaseLead extends ResourceEntity<ILeadFactory> {
+export default class Lead extends ResourceEntity<ILeadFactory> {
     name?: string;
     price?: number;
     responsible_user_id?: number;
@@ -163,12 +157,3 @@ export class BaseLead extends ResourceEntity<ILeadFactory> {
         this._embedded = attributes._embedded;
     }
 }
-
-const Lead = applyMixins(BaseLead, [
-    hasCreate,
-    hasUpdate,
-    hasSave,
-    hasFetch
-]);
-
-export default Lead;

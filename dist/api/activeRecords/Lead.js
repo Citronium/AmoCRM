@@ -1,21 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BaseLead = void 0;
 const tslib_1 = require("tslib");
 /**
  * Сделка (сущность)
  */
 const ResourceEntity_1 = tslib_1.__importDefault(require("../ResourceEntity"));
-const util_1 = require("../../util");
-const hasSave_1 = require("./mixins/hasSave");
-const hasFetch_1 = require("./mixins/hasFetch");
-const hasCreate_1 = require("./mixins/hasCreate");
-const hasUpdate_1 = require("./mixins/hasUpdate");
 const HasCreate_1 = require("./decorators/HasCreate");
+const HasUpdate_1 = require("./decorators/HasUpdate");
+const HasSave_1 = require("./decorators/HasSave");
+const HasFetch_1 = require("./decorators/HasFetch");
 /**
  * Сделка
  */
-let BaseLead = class BaseLead extends ResourceEntity_1.default {
+let Lead = class Lead extends ResourceEntity_1.default {
     getAttributes() {
         return {
             id: this.id,
@@ -59,15 +56,11 @@ let BaseLead = class BaseLead extends ResourceEntity_1.default {
         this._embedded = attributes._embedded;
     }
 };
-BaseLead = tslib_1.__decorate([
-    HasCreate_1.HasCreate
-], BaseLead);
-exports.BaseLead = BaseLead;
-const Lead = (0, util_1.applyMixins)(BaseLead, [
-    hasCreate_1.hasCreate,
-    hasUpdate_1.hasUpdate,
-    hasSave_1.hasSave,
-    hasFetch_1.hasFetch
-]);
+Lead = tslib_1.__decorate([
+    HasCreate_1.HasCreate,
+    HasUpdate_1.HasUpdate,
+    HasFetch_1.HasFetch,
+    HasSave_1.HasSave
+], Lead);
 exports.default = Lead;
 //# sourceMappingURL=Lead.js.map

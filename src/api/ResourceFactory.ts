@@ -8,9 +8,9 @@ import { TConstructor } from "../types";
  * Основной класс фабрики сущностей. Класс-фабрика служит для создания
  * новых сущностей. Например, {@link LeadFactory} отвечает за {@link Lead}
  * */
-export default abstract class ResourceFactory<T extends IResourceEntity<IResourceFactory<T>>>
+export default abstract class ResourceFactory
     extends EventEmitter
-    implements IResourceFactory<T>
+    implements IResourceFactory
 {
     protected readonly request: IClientRequest;
 
@@ -31,12 +31,12 @@ export default abstract class ResourceFactory<T extends IResourceEntity<IResourc
     /**
      * @returns новый экземпляр сущности. Например, {@link LeadFactory} вернёт {@link Lead}
      * */
-    createEntity(): T {
-        const className = this.getEntityClass();
+    createEntity<T extends IResourceEntity<IResourceFactory>>(): T {
+        const className = this.getEntityClass<T>();
         return new className(this);
     }
 
-    abstract getEntityClass(): TConstructor<T>;
+    abstract getEntityClass<T extends IResourceEntity<IResourceFactory>>(): TConstructor<T>;
 
     /**
      * Возвращает ссылку на объект запроса
@@ -56,8 +56,8 @@ export default abstract class ResourceFactory<T extends IResourceEntity<IResourc
      * Создаёт сущность и заполняет её атрибутами, которые
      * будут синхронизироваться с порталом AmoCRM
      * */
-    from(attributes?: object): T {
-        const instance = this.createEntity();
+    from<T extends IResourceEntity<IResourceFactory>>(attributes?: object): T {
+        const instance = this.createEntity<T>();
         instance.setAttributes(attributes);
         return instance;
     }

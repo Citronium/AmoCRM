@@ -1,17 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BaseContact = void 0;
+exports.Contact = void 0;
 const tslib_1 = require("tslib");
 /**
  * Сделка (сущность)
  */
 const ResourceEntity_1 = tslib_1.__importDefault(require("../ResourceEntity"));
-const util_1 = require("../../util");
-const hasCreate_1 = require("./mixins/hasCreate");
-const hasUpdate_1 = require("./mixins/hasUpdate");
-const hasSave_1 = require("./mixins/hasSave");
-const hasFetch_1 = require("./mixins/hasFetch");
-class BaseContact extends ResourceEntity_1.default {
+const HasCreate_1 = require("./decorators/HasCreate");
+const HasUpdate_1 = require("./decorators/HasUpdate");
+const HasFetch_1 = require("./decorators/HasFetch");
+const HasSave_1 = require("./decorators/HasSave");
+let Contact = class Contact extends ResourceEntity_1.default {
     getAttributes() {
         return {
             id: this.id,
@@ -44,13 +43,12 @@ class BaseContact extends ResourceEntity_1.default {
         this.account_id = attributes.account_id;
         this._embedded = attributes._embedded;
     }
-}
-exports.BaseContact = BaseContact;
-const Contact = (0, util_1.applyMixins)(BaseContact, [
-    hasCreate_1.hasCreate,
-    hasUpdate_1.hasUpdate,
-    hasSave_1.hasSave,
-    hasFetch_1.hasFetch
-]);
-exports.default = Contact;
+};
+Contact = tslib_1.__decorate([
+    HasCreate_1.HasCreate,
+    HasUpdate_1.HasUpdate,
+    HasFetch_1.HasFetch,
+    HasSave_1.HasSave
+], Contact);
+exports.Contact = Contact;
 //# sourceMappingURL=Contact.js.map

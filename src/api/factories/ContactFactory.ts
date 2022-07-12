@@ -42,7 +42,7 @@ export interface ContactUpdateResult {
     updated_at: number;
 }
 
-export interface IContactFactory extends IResourceFactory<IContact> {
+export interface IContactFactory extends IResourceFactory {
     /**
      * @param criteria фильтр контактов (https://www.amocrm.ru/developers/content/crm_platform/contacts-api#contacts-list)
      * @example
@@ -78,10 +78,10 @@ export interface IContactFactory extends IResourceFactory<IContact> {
 /**
  * Фабрика управления контактами
  * */
-export class BaseContactFactory extends ResourceFactory<IContact> {
+export class BaseContactFactory extends ResourceFactory {
 
     getEntityClass() {
-        return new Contact(this);
+        return Contact;
     }
 
     getBaseUrl(): string {

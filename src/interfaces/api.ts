@@ -4,10 +4,10 @@ import { IRequestOptions } from "./common";
 import { IEventEmitter } from "../common/EventEmitter";
 import EventEmitter from "events";
 
-export interface IResourceFactory<T extends IResourceEntity<IResourceFactory<T>>> extends IEventEmitter {
-    getEntityClass(): TConstructor<T>;
-    createEntity(): T;
-    from(attributes?: IEntityAttributes): T;
+export interface IResourceFactory extends IEventEmitter {
+    getEntityClass<T extends IResourceEntity<IResourceFactory>> (): TConstructor<T>;
+    createEntity<T extends IResourceEntity<IResourceFactory>>(): T;
+    from<T extends IResourceEntity<IResourceFactory>>(attributes?: IEntityAttributes): T;
     getRequest(): IClientRequest;
     getEmbeddedKey(): string;
     getEmbedded<A extends IEntityAttributes>(data: ICollectionResponse<A>): A[];

@@ -72,7 +72,7 @@ export interface IContact extends IResourceEntity<IContactFactory>, ContactAttri
      * */
     fetch(criteria?: IHasGetByIdCriteria, options?: IRequestOptions): Promise<IContact>;
 }
-export declare class BaseContact extends ResourceEntity<IContactFactory> {
+export declare class Contact extends ResourceEntity<IContactFactory> {
     name?: string;
     first_name?: string;
     last_name?: string;
@@ -90,5 +90,3 @@ export declare class BaseContact extends ResourceEntity<IContactFactory> {
     getAttributes(): ContactAttributes;
     setAttributes(attributes?: ContactAttributes): void;
 }
-declare const Contact: any;
-export default Contact;

@@ -81,7 +81,7 @@ export interface ILead extends IResourceEntity<ILeadFactory>, LeadAttributes {
 /**
  * Сделка
  */
-export declare class BaseLead extends ResourceEntity<ILeadFactory> {
+export default class Lead extends ResourceEntity<ILeadFactory> {
     name?: string;
     price?: number;
     responsible_user_id?: number;
@@ -104,5 +104,3 @@ export declare class BaseLead extends ResourceEntity<ILeadFactory> {
     getAttributes(): LeadAttributes;
     setAttributes(attributes: LeadAttributes): void;
 }
-declare const Lead: any;
-export default Lead;

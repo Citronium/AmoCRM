@@ -1,13 +1,13 @@
-import { IResourceEntity, IResourceFactory } from "../../../interfaces/api";
+import { IResourceEntity } from "../../../interfaces/api";
 import { TEntityConstructor } from "../../../types";
 import { IRequestOptions } from "../../../interfaces/common";
-import { IHasCreateFactory } from "../../factories/mixins/hasCreate";
-export interface IHasCreateEntity<T extends IResourceFactory<IResourceEntity<T>>> extends IResourceEntity<T> {
-    create(options?: IRequestOptions): Promise<T | false>;
+import { ICanGetByIdFactory, IHasGetByIdCriteria } from "../../factories/mixins/hasGetById";
+export interface IHasFetchEntity<T extends ICanGetByIdFactory<IResourceEntity<T>>> {
+    fetch(criteria?: IHasGetByIdCriteria, options?: IRequestOptions): Promise<IHasFetchEntity<T> | false | null>;
 }
-export declare function HasCreate<T extends TEntityConstructor<F>, F extends IHasCreateFactory<IResourceEntity<F>>>(Base: T): {
+export declare function HasFetch<T extends TEntityConstructor<F>, F extends ICanGetByIdFactory<IResourceEntity<F>>>(Base: T): {
     new (...args: any[]): {
-        create(options?: IRequestOptions | undefined): Promise<IResourceEntity<F>>;
+        fetch(criteria?: IHasGetByIdCriteria | undefined, options?: IRequestOptions | undefined): Promise<false | IResourceEntity<F> | null>;
         id?: number | undefined;
         updated_at?: number | undefined;
         isNew(): boolean;

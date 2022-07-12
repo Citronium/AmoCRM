@@ -6,12 +6,12 @@ import { IContactFactory } from "../factories/ContactFactory";
 import { JSONObject } from "../../types";
 import { IEntityAttributes, IResourceEntity } from "../../interfaces/api";
 import { applyMixins } from "../../util";
-import { hasCreate } from "./mixins/hasCreate";
-import { hasUpdate } from "./mixins/hasUpdate";
-import { hasSave } from "./mixins/hasSave";
-import { hasFetch } from "./mixins/hasFetch";
 import { IRequestOptions } from "../../interfaces/common";
 import { IHasGetByIdCriteria } from "../factories/mixins/hasGetById";
+import { HasCreate } from "./decorators/HasCreate";
+import { HasUpdate } from "./decorators/HasUpdate";
+import { HasFetch } from "./decorators/HasFetch";
+import { HasSave } from "./decorators/HasSave";
 
 export interface ContactAttributes extends IEntityAttributes {
     id?: number;
@@ -80,7 +80,11 @@ export interface IContact extends IResourceEntity<IContactFactory>, ContactAttri
     fetch(criteria?: IHasGetByIdCriteria, options?: IRequestOptions): Promise<IContact>;
 }
 
-export class BaseContact extends ResourceEntity<IContactFactory> {
+@HasCreate
+@HasUpdate
+@HasFetch
+@HasSave
+export default class Contact extends ResourceEntity<IContactFactory> {
     name?: string;
     first_name?: string;
     last_name?: string;
@@ -130,12 +134,3 @@ export class BaseContact extends ResourceEntity<IContactFactory> {
         this._embedded = attributes._embedded;
     }
 }
-
-const Contact = applyMixins(BaseContact, [
-    hasCreate,
-    hasUpdate,
-    hasSave,
-    hasFetch
-]);
-
-export default Contact;
