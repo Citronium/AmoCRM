@@ -14,6 +14,7 @@ export interface IResourceFactory<T extends IResourceEntity<IResourceFactory<T>>
     getUrl(path?: string): string;
     getEntityCriteria(criteriaData: (object)[]): IEntityAttributes[];
 }
+// @ts-ignore
 export interface IResourceEntity<T extends IResourceFactory<IResourceEntity<T>>> extends EventEmitter.EventEmitter, IEventEmitter {
     id?: number;
     updated_at?: number;

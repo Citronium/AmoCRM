@@ -1,5 +1,6 @@
 /// <reference types="node" />
 import { EventEmitter as EventEmitterBase } from "events";
+// @ts-ignore
 export interface IEventEmitter extends EventEmitterBase.EventEmitter {
     subscribe(subscriber: IEventEmitter): IEventEmitter;
     unsubscribe(subscriber: IEventEmitter): IEventEmitter;
